@@ -74,7 +74,7 @@ function ModulePage({ page, onSave }: { page: PageDef; onSave: (msg: string) => 
   return (
     <>
       <div className="title-row"><div><p className="eyebrow">{page.subtitle}</p><h1>{page.title}</h1></div></div>
-      <div className="bottom-grid">
+      <div className="module-grid">
         <Section title="New entry">
           <div className="form-grid">{page.fields.map((f) => <label key={f}>{f}<input value={form[f] ?? ""} onChange={(e) => setForm({ ...form, [f]: e.target.value })} /></label>)}</div>
           <button className="primary full" onClick={save}>Save entry</button>
