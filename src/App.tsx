@@ -93,6 +93,7 @@ function ModulePage({ page, onSave }: { page: PageDef; onSave: (msg: string) => 
 
 export default function App() {
   const [activeNav, setActiveNav] = useState("Dashboard");
+  const [menuOpen, setMenuOpen] = useState(false);
   const [nozzles, setNozzles] = useState<Nozzle[]>(initialNozzles);
   const [date, setDate] = useState("2026-10-18");
   const [notice, setNotice] = useState("");
@@ -120,17 +121,19 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <aside className="sidebar">
+      {menuOpen && <div className="backdrop" onClick={() => setMenuOpen(false)} />}
+      <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
         <div className="brand"><span className="brand-icon">P</span><div><strong>PETROLEUM</strong><small>Operations · Inventory · Accounts</small></div></div>
         <nav aria-label="Primary navigation">
-          {nav.map((item) => <button key={item} onClick={() => setActiveNav(item)} className={activeNav === item ? "active" : ""}><span className="nav-dot" />{item}</button>)}
+          {nav.map((item) => <button key={item} onClick={() => { setActiveNav(item); setMenuOpen(false); window.scrollTo(0, 0); }} className={activeNav === item ? "active" : ""}><span className="nav-dot" />{item}</button>)}
         </nav>
         <div className="system-state"><span /> System operational<small>Last backup: 10:30 PM</small></div>
       </aside>
 
       <div className="workspace">
         <header className="topbar">
-          <div className="mobile-brand">PMS</div>
+          <button className="menu-toggle" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><span /><span /><span /></button>
+          <div className="mobile-brand"><strong>PMS</strong><small>{activeNav}</small></div>
           <label>Branch<select><option>Main Pump</option></select></label>
           <label>Date<input type="date" value={date} onChange={(e) => setDate(e.target.value)} /></label>
           <label>Active shift<select><option>Evening · Open</option><option>Morning · Closed</option></select></label>
