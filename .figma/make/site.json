@@ -1,0 +1,15 @@
+{
+  "title": "Petroleum Pump Management System",
+  "description": "Streamline petroleum retail operations with a comprehensive management system that digitizes sales, inventory, and accounting for petrol pump operators.",
+  "language": "en",
+  "robots": {
+    "index": false
+  },
+  "icons": {
+    "icon": "/favicon.svg"
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
